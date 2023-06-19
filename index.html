@@ -1,84 +1,52 @@
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <script type="text/javascript" src="script.js"></script>
-    </head>
-    <body class="body-background">
-        <div class="header">Mutual Fund Investment Calculator</div>
-        <div class="page-container">
-            <div class="switch-container">
-                <div class="radio-button">
-                    <label for="sip">SIP</label>
-                    <input type="radio" checked name="checked" value="SIP">
-                    <label for="lumpsum">LumpSum</label>
-                    <input type="radio" name="checked" value="LumpSum">
-                </div>
-                <div class="dropdown">
-                    Currency
-                    <select onchange="currencyChange(this)" id="currency" class="currency">
-                        <!-- &#8377; -->
-                        <option value="Rs">&#8377; &nbsp;INR</option>
-                        <option value="$">&#128176;USD</option>
-                        <!-- &#x24; -->
-                    </select>
-            </div>
-        </div>
-            <div class="input-container">
-                <div>
-                    <div>Investment &#10067<span id="mode-1"></span> </div>
-                    <br/>
-                    <div><input id="investment" type="text" onchange="commas(this)"/></div>
-                    <br/>
-                    <div>Number of Years &#10067 <span id="mode-2"></span></div>
-                    <br/>
-                    <div><input id="years" type="number"></div> 
-                    <br/>
-                    <div>Expected Rate of Return &#10067 <span id="mode-3">SIP</div>
-                    <br/>
-                    <div><input id="return-rate"  type="text" onchange="percentage(this)")/></div> 
-                </div>
-            </div>
-            </br/>
-            <div class="btn-calculate">
-                <button type="button" onclick="calculateResult()">
-                    Calculate
-                </button>
-            </div>
-            </br/>
-            <div style="display: flex;">
-                <div class="result">Result :</div>
-              <div class="result-container">
-                    <div>Investment for <span id="mode-1">SIP</span></div>
-                    <br/>
-                    <div><span>Rs.</span>&nbsp;<span id="input-1"></span></div>
-                    <br/>
-                    <div>Number of Years <span id="mode-2">SIP</span></div>
-                    <br/>
-                    <div><span>Years:</span>&nbsp;<span id="input-2"></span></div> 
-                    <br/>
-                    <div>Expected Rate of Return <span id="mode-3">SIP</span></div>
-                    <br/>
-                    <div><span>%:</span>&nbsp;<span id="input-3"></span></div> 
-            </div>
-            <div class="result-container">
-                <div>Total Investment 💸</div>
-                <br/>
-                <div><span id="currency-change-1">Rs.</span>&nbsp;<span id="total"></span></div>
-                <br/>
-                <div>Wealth Gained 💸</div>
-                <br/>
-                <div><span id="currency-change-2">Rs.</span>&nbsp;<span id="wealth-gained"></span></div> 
-                <br/>
-                <div>Maturity Value 💸</div>
-                <br/>
-                <div><span id="currency-change-3">Rs.</span>&nbsp;<span id="maturity-value"></span></div> 
-        </div>
-    </div>
-            <br/>
-            
-        </div>
-    </div>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
 
-    
-</html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Fund Returns Calculator</title>
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 style="text-align: center;">Mutual Fund Returns Calculator</h1>
+    <div class="container">
+      <label for="investmentAmount" style="display: flex; justify-content: space-between;">
+        <span>Total Investment Amount:</span><br>
+        <input type="number" id="investmentAmount" min="100" max="10000000" step="1000" value="25000" class="slider"
+          onchange="updateSlider('investmentAmount', 'investmentTrack', 'investmentAmount')"
+          oninput="updateSlider('investmentAmount', 'investmentTrack', 'investmentAmount')">
+      </label>
+  
+      <input type="range" id="investmentTrack" min="100" max="10000000" step="1000" value="25000" class="slider"
+        oninput="updateSlider('investmentTrack', 'investmentAmount', 'investmentTrack')"><br><br>
+  
+      <label for="returnRate" style="display: flex; justify-content: space-between;">
+        <span>Expected Return Rate (%):</span><br>
+        <input type="number" id="returnRate" min="1" max="20" step="0.01" value="12" class="slider"
+          onchange="updateSlider('returnRate', 'returnRateTrack', 'returnRate')"
+          oninput="updateSlider('returnRate', 'returnRateTrack', 'returnRate')">
+      </label>
+  
+      <input type="range" id="returnRateTrack" min="1" max="20" step="0.01" value="12" class="slider"
+        oninput="updateSlider('returnRateTrack', 'returnRate', 'returnRateTrack')"><br><br>
+  
+      <label for="timePeriod" style="display: flex; justify-content: space-between;">
+        <span>Time Period (In Year):</span><br>
+        <input type="number" id="timePeriod" min="1" max="50" step="1" value="10" class="slider"
+          onchange="updateSlider('timePeriod', 'timePeriodTrack', 'timePeriod')"
+          oninput="updateSlider('timePeriod', 'timePeriodTrack', 'timePeriod')">
+      </label>
+  
+      <input type="range" id="timePeriodTrack" min="1" max="50" step="1" value="10" class="slider"
+        oninput="updateSlider('timePeriodTrack', 'timePeriod', 'timePeriodTrack')"><br><br>
+  
+      <button onclick="calculate()">Calculate</button><br><br>
+  
+      <div id="result-container"></div>
+      
+    </div>
+<script src="main.js"></script>
+
+  </body>
+  </html>
